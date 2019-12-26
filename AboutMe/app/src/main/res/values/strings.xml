@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">About Me</string>
+    <string name="name">Ahmad Shofi</string>
+    <string name="yellow_star">Yellow star</string>
+    <string name="bio">Hi, my name is Ahmad
+    \n\nLorem Ipsum is simply dummy text of the printing and typesetting industry.
+        \n\nLorem Ipsum has been the industry`s standard dummy text ever since the 1500s,
+        \n\nwhen an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        \n\nIt has survived not only five centuries, but also the leap into electronic typesetting,
+        \n\nremaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+        \n\nsheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+        \n\nAldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="what_is_your_nickname">What is Your Nickname?</string>
+    <string name="done">Done</string>
+</resources>
