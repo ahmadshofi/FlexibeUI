@@ -1,4 +1,4 @@
-package com.ahmad.sportview.DetailFragment
+package com.ahmad.sportview.detail
 
 
 import android.os.Bundle

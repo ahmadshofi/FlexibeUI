@@ -1,4 +1,4 @@
-package com.ahmad.sportview.Network
+package com.ahmad.sportview.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -25,7 +25,7 @@ private val retrofit = Retrofit.Builder()
 interface SportApiService {
     @GET("all_sports.php")
     fun getProperties(@Query("filter") strFormat: String):
-            Deferred<List<SportProperty>>
+            Deferred<SportResponse>
 }
 
 object SportApi{

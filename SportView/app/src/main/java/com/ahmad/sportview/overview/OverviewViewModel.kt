@@ -1,20 +1,20 @@
-package com.ahmad.sportview.Overview
+package com.ahmad.sportview.overview
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ahmad.sportview.Network.SportApi
-import com.ahmad.sportview.Network.SportApiFilter
-import com.ahmad.sportview.Network.SportProperty
+import com.ahmad.sportview.network.SportApi
+import com.ahmad.sportview.network.SportApiFilter
+import com.ahmad.sportview.network.SportsItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 enum class SportApiStatus { LOADING, ERROR, DONE }
 
 class OverviewViewModel: ViewModel(){
+
     private val _respones = MutableLiveData<String>()
 
     val response:LiveData<String>
@@ -24,14 +24,13 @@ class OverviewViewModel: ViewModel(){
     val status: LiveData<SportApiStatus>
     get() = _status
 
-    private val _properties = MutableLiveData<List<SportProperty>>()
-
-    val properties: LiveData<List<SportProperty>>
+    private val _properties = MutableLiveData<List<SportsItem?>?>()
+    val properties: LiveData<List<SportsItem?>?>
     get() = _properties
 
-    private val _navigateToSelectedProperty = MutableLiveData<SportProperty>()
+    private val _navigateToSelectedProperty = MutableLiveData<SportsItem>()
 
-    val navigateToSelectedProperty: LiveData<SportProperty>
+    val navigateToSelectedProperty: LiveData<SportsItem>
         get() = _navigateToSelectedProperty
 
     private var viewModelJob = Job()
@@ -50,7 +49,7 @@ class OverviewViewModel: ViewModel(){
                 _status.value = SportApiStatus.LOADING
                 val listResult = getPropertiesDeferred.await()
                 _status.value =SportApiStatus.DONE
-                _properties.value = listResult
+                _properties.value = listResult.sports
             }catch (e: Exception){
                 _status.value = SportApiStatus.ERROR
                 _properties.value = ArrayList()
@@ -61,6 +60,14 @@ class OverviewViewModel: ViewModel(){
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
+    }
+
+    fun displayPropertyDetails(sportProperty: SportsItem) {
+        _navigateToSelectedProperty.value = sportProperty
+    }
+
+    fun displayPropertyDetailsComplete() {
+        _navigateToSelectedProperty.value = null
     }
 
     fun updateFilter(filter: SportApiFilter) {
